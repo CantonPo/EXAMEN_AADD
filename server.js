@@ -1,23 +1,22 @@
-const express = require('express');
-const fs = require('fs');
-const https = require('https');
+const express = require("express");
+const https = require("https");
+const fs = require("fs");
+
 const app = express();
-app.use(express.json());
-const path = require('path');
+const PORT = 443; // HTTPS usa el puerto 443
 
-const APIKEY = "123456";
-
-app.get('/', (req, res) => {
-  res.send('Bienvenido');
-})
-
-
-
+// Cargar los certificados
 const options = {
-  key: fs.readFileSync(path.join(__dirname, 'privkey.pem')),
-  cert: fs.readFileSync(path.join(__dirname, 'fullchain.pem'))
+  key: fs.readFileSync("/etc/letsencrypt/live/dev9.cyberbunny.online/privkey.pem"),
+  cert: fs.readFileSync("/etc/letsencrypt/live/dev9.cyberbunny.online/fullchain.pem")
 };
 
-https.createServer(options, app).listen(3000, () => {
-  console.log('Server started on https://dev9.cyberbunny.online:3000');
+// Ruta de prueba
+app.get("/", (req, res) => {
+  res.send("¡Servidor HTTPS con Express funcionando! 🚀");
+});
+
+// Crear el servidor HTTPS
+https.createServer(options, app).listen(PORT, () => {
+  console.log(`Servidor HTTPS corriendo en https://dev9.cyberbunny.online`);
 });
