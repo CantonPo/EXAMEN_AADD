@@ -1,0 +1,24 @@
+{
+  "name": "examen_aadd",
+  "version": "1.0.0",
+  "description": "Aquí ire redactando los pasos del examen",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CantonPo/EXAMEN_AADD.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CantonPo/EXAMEN_AADD/issues"
+  },
+  "homepage": "https://github.com/CantonPo/EXAMEN_AADD#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
