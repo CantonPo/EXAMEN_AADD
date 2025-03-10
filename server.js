@@ -3,7 +3,7 @@ const https = require("https");
 const fs = require("fs");
 
 const app = express();
-const PORT = 443; // HTTPS usa el puerto 443
+const PORT = 443; 
 
 // Cargar los certificados
 const options = {
@@ -13,7 +13,7 @@ const options = {
 
 // Ruta de prueba
 app.get("/", (req, res) => {
-  res.send("¡Servidor HTTPS con Express funcionando! 🚀");
+  res.send("¡Servidor HTTPS con Express funcionando! ");
 });
 
 // Crear el servidor HTTPS
