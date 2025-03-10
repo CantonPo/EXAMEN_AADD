@@ -1,0 +1,41 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - main  # Desplegar solo cuando se haga un push a la rama principal
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest  # Usa un runner Ubuntu
+
+    steps:
+    # Paso 1: Revisar el código del repositorio
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    # Paso 2: Configurar Node.js
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'  # Usa la versión de Node.js que usas en tu proyecto
+
+    # Paso 3: Instalar las dependencias de tu proyecto
+    - name: Install dependencies
+      run: npm install
+
+    # Paso 4: Copiar archivos a tu VPS
+    - name: Copy files to VPS
+      run: |
+        ssh -o StrictHostKeyChecking=no -i ${{ secrets.VPS_SSH_KEY }} user@your_vps_ip << 'EOF'
+          cd /path/to/your/project
+          git pull origin main  # Actualiza el repositorio en el VPS
+          npm install  # Instala las dependencias
+          pm2 restart server.js  # Reinicia el servidor con PM2 (o el proceso que uses)
+        EOF
+      env:
+        VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}  # Clave SSH almacenada como secreto
+
+    # Paso 5: Opcional: Notificar si el despliegue fue exitoso
+    - name: Notify Deployment Success
+      run: echo "Despliegue exitoso!"
