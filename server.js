@@ -1,9 +1,12 @@
 const express = require("express");
 const https = require("https");
 const fs = require("fs");
+const cors = require("cors");  
 
 const app = express();
 const PORT = 443; 
+
+app.use(cors());
 
 // Cargar los certificados
 const options = {
